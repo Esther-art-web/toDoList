@@ -1,27 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import '../App.css';
 import { ButtonToolbar,ButtonGroup, Button } from 'react-bootstrap'
-// import Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import ModalBox from './Modal'
+import Task from './Task';
 class Entry extends Component {
     state={
         selectedCounter: true
     }
     styles1={
+        width: '100%',
+        height:'100%',
         position: 'relative',
         paddingTop: 100,
         paddingLeft: 30,
         paddingRight: 30,
     }
     styles2={
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 20,
-        paddingRight: 20,
-        fontSize: 40,
+        paddingTop: 2,
+        paddingBottom: 2,
+        paddingLeft: 10,
+        paddingRight: 10,
+        fontSize: 25,
         position: 'fixed',
-        borderRadius:'50%' ,
-        bottom: 20,
-        right: 0,
+        borderRadius:10 ,
+        top: 240,
+        right: 150,
         backgroundColor: '#5f8f8f'
     }
     checkBoxStyle={
@@ -33,30 +36,10 @@ class Entry extends Component {
     }
     titleStyle={
         borderTop: 20,
-        borderLeft: 'none',
-        borderRight: 'none',
         marginTop: 30,
         fontSize: 25,
         fontWeight:' bold',
-        display: 'block',
-        
-    }
-    inputStyle1={
-        borderTop: 'none',
-        borderLeft: 'none',
-        borderRight: 'none',
-        marginTop: 20,
-        fontSize: 15,
-        padding: 'none',
-        display: 'block',
-        // control: (base, state) => ({
-        //     ...base,
-        //     border: '1px solid black',
-        //     boxShadow: 'none',
-        //     '&:hover': {
-        //         border: '1px solid black',
-        //     }
-        // })
+       textAlign: 'center'
         
     }
     bottomStyle={
@@ -65,66 +48,96 @@ class Entry extends Component {
         right: '30%',
         // margin: '200px',
         fontWeight:'bold',
-        fontFamily: 'Roboto'
+        fontFamily: 'Roboto',
+        zIndex:-2
     }
     deletestyle={
-        marginTop: 20,
-        width: 40,
+        borderwidth: 1 ,
+        borderStyle:'solid ',
+        borderColor: 'white',
+        boxSizing: 'border-box',
+        paddingRight: 10,
+        width: 35,
         height:30,
         textAlign: 'center',
-        padding: 'none',
-        fontSize: 20,
-        backgroundColor:'#5f8f8f'
+        fontSize: 15,
+        backgroundColor:'#5f8f8f',
+        position:'absolute',
+        right: 0,
+        top: 30
+    }
+    editstyle={
+        borderwidth: 1 ,
+        borderStyle:'solid ',
+        borderColor: 'white',
+        boxSizing: 'border-box',
+        paddingRight: 10,
+        width: 35,
+        height:30,
+        textAlign: 'center',
+        fontSize: 15,
+        backgroundColor:'#5f8f8f',
+        position:'absolute',
+        right: 40,
+        top: 30
     }
     textStyle={
         position: 'absolute',
-        right:0,
+        right: 20,
         fontFamily: 'Roboto'
         
     }
+    taskStyle={
+        display: 'inline',
+        // marginTop: 30, 
+        width: '60%'
+
+    }
+    entryStyle={
+        position: 'relative',
+        width: '60%',
+        marginLeft: '20%',
+        marginBottom: 10
+    }
+
 
     
     render() { 
         
         return ( 
 
-            <div className='main-content' style={this.styles1}>
-                <div>
-                    <label htmlFor="date">Select a date:</label>
+            <div className='main-content'  style={this.styles1}>
+                <div >
         
-                    <input type="date" id='date' className="form-control" aria-label="..."/> 
-                    <input type="text" style={this.titleStyle}  className="form-control" aria-label="..." placeholder='Enter a suitable title'/>
-                    
+                    {/* <input type="date" id='date' width='10px' className="form-control" aria-label="..."/>  */}
+                    <h1  style={this.titleStyle} className='title'> My To do List</h1>
+                    <Task onTextChange={this.props.onTextChange} onTextEdit={this.props.onTextEdit} onAdd= {this.props.onAdd} task={this.props.task} />
                     {this.props.counter.map((count,index)=>{
                         return(
-                        <div className="row" >
+                        <div style={this.entryStyle} >
                             <div className="col-lg-12">
-                            <div className="input-group">
-                            <span>
-                                <input type="checkbox" style={this.checkBoxStyle} onClick={()=>this.props.onCheckBoxClick(count)} aria-label="..."/>
-                            </span>
-                                <input type="text" style={this.inputStyle1}   key={index} id={index}   className="form-control" aria-label="..."/>
-                                <span style={this.textStyle} >
-                                    {this.props.mssg(index)}
-                                </span>
-                                <Button  style={this.deletestyle} onClick={()=> this.props.onDelete(count.id)}>
-                                <i className= 'fa fa-minus'></i>
-                            {/* <Glyphicon glyph="glyphicon glyphicon-plus" /> */}
-                            </Button>
+                                <div >
+                                    <span>
+                                        <input type="checkbox"  key={index} id={index} style={this.checkBoxStyle} onClick={(event)=>this.props.onCheckBoxClick(event,index)} aria-label="..."/>
+                                    </span>
+                                    <div  key={index} id={index}  style={this.taskStyle} className="" aria-label="...">{count.value}</div>
+                                    <span style={this.textStyle} >
+                                        {this.props.mssg(index)}
+                                    </span>
+                                    <Button  style={this.editstyle} onClick={(event)=>this.props.onEdit(event,index)} id={count.id}>
+                                        <i className= 'fa fa-pencil' ></i>
+                                    </Button>
+                                    <Button  style={this.deletestyle} onClick={()=> this.props.onDelete(count.id)}>
+                                        <i className= 'fa fa-trash' ></i>
+                                    </Button>
+                                </div>
                             </div>
-                            </div>
+                            <ModalBox index={index} onTextEditChange={this.props.textEditChange}  onTextChange={this.props.onTextChange} onTextEdit={this.props.onTextEdit} onAdd= {this.props.onAdd} task={this.props.task}/>
                     </div>);}
                     )}
                 </div>
-                <ButtonToolbar >
-                    <ButtonGroup>
-                    <Button  style={this.styles2} onClick={()=>this.props.onAdd()}>
-                    <i className= 'fa fa-plus'></i>
-                        {/* <Glyphicon glyph="glyphicon glyphicon-plus" /> */}
-                    </Button>
-                    </ButtonGroup>
-                </ButtonToolbar>
-                <span style={this.bottomStyle}><i>Everything that is worth doing, is worth doing well</i></span>
+                
+                {/* <span style={this.bottomStyle}><i>Everything that is worth doing, is worth doing well</i></span> */}
             </div>
          );
     }

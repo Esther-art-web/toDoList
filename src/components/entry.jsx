@@ -114,7 +114,7 @@ class Entry extends Component {
                     <Task onTextChange={this.props.onTextChange} onTextEdit={this.props.onTextEdit} onAdd= {this.props.onAdd} task={this.props.task} />
                     {this.props.counter.map((count,index)=>{
                         return(
-                        <div style={this.entryStyle} >
+                        <div style={this.entryStyle} id={index} >
                             <div className="col-lg-12">
                                 <div >
                                     <span>
@@ -122,7 +122,7 @@ class Entry extends Component {
                                     </span>
                                     <div  key={index} id={index}  style={this.taskStyle} className="" aria-label="...">{count.value}</div>
                                     <span style={this.textStyle} >
-                                        {this.props.mssg(index)}
+                                        {count.checked}
                                     </span>
                                     <Button  style={this.editstyle} onClick={(event)=>this.props.onEdit(event,index)} id={count.id}>
                                         <i className= 'fa fa-pencil' ></i>

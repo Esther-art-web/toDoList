@@ -9,7 +9,6 @@ class App extends Component {
     this.state={
       counters: [ ],
       selectedCounter:null,
-      checked:false,
       value:''
       
     };
@@ -24,7 +23,7 @@ class App extends Component {
     const counters=  [...this.state.counters,
                               {id:this.nextId(),
                                 value: this.state.value,
-                                checked:false}]
+                                checked:'Undone'}]
     this.setState({counters})
     this.setState({task: ''})
 
@@ -40,15 +39,26 @@ class App extends Component {
   }
   handleCheckBoxClick=(event,counterIndex)=>{
     console.log(event.target.id)
-    console.log(counterIndex)
+    console.log(counterIndex) 
+    var tasks= [...this.state.counters]
+    var taskList= tasks
+
     if(event.target.id==counterIndex){
-      var prevCounter=this.state.counters.filter((c)=> c.id!== this.state.edit)
-      var counter=this.state.counters.filter((c)=> c.id=== counterIndex)[0]
-      counter.checked===false? 
-                            counter.checked=true : 
-                            counter.checked=false
-      var counters=[counter, ...prevCounter]
-      this.setState({counters})  
+      // var c = tasks.filter((c)=>{ 
+                       
+      //                   })
+      var c= tasks.filter((c)=> (c.id===counterIndex))[0]
+      c.checked==='Undone'? c.checked='Done': c.checked='Undone'
+          
+      var pc= tasks.filter((c)=> (c.id!==counterIndex))
+      
+                
+      var counters= [...pc,c ]
+      // var counters= this.state.counters.map((c)=> {c.checked==='Undone'? c.checked='Done': c.checked='Undone'})
+      this.setState({counters})
+      console.log( "Previous Counter:", pc)  
+      console.log( "counter:", c)
+      console.log("counters:", this.state.counters)
     }                    
   }
   handleEdit=(event,index)=>{
@@ -59,13 +69,7 @@ class App extends Component {
       
     }
   }
-  handleMssg=(index)=>{
-    if (this.state.counters[index].checked===false)
-     return (<span>Undone</span>);
-    else{
-      return (<span>Done</span>);
-    } 
-  }
+  
   handleTextEdit=()=>{
     var prevCounter=this.state.counters.filter((c)=> c.id!== this.state.edit)
     const counters=  [...prevCounter,
@@ -87,7 +91,7 @@ class App extends Component {
     return ( 
     <React.Fragment>
       <NavBar counter={this.state.counters}/>
-      <Entry counter={this.state.counters} task={this.state.task} onCheckBoxClick={this.handleCheckBoxClick} task={this.state.task} onTextChange={this.handleChange} onAdd={this.handleEntry}  onDelete={this.handleDelete} onTextEdit={this.handleTextEdit} onEdit={this.handleEdit} mssg={this.handleMssg}/>
+      <Entry counter={this.state.counters} task={this.state.task} onCheckBoxClick={this.handleCheckBoxClick} onTextChange={this.handleChange} onAdd={this.handleEntry}  onDelete={this.handleDelete} onTextEdit={this.handleTextEdit} onEdit={this.handleEdit} mssg={this.handleMssg}/>
     </React.Fragment> );
   }
 }

@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import '.'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ModalBox from './components/Modal';
 
+import { Provider } from  'react-redux';
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <Provider store = { store }>
     <App />
-  </React.StrictMode>,
+  // </Provider>
+  ,
   document.getElementById('root')
 );
 

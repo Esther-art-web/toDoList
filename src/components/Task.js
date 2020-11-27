@@ -1,71 +1,32 @@
-import React,{ useState } from 'react';
+import React,{ useContext, useState, useEffect} from 'react';
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker"
-import { ButtonToolbar,ButtonGroup, Button } from 'react-bootstrap'
-
-var dateStyle={
-    position: 'absolute',
-    left: 180,
-    top:60
-}
-var inputStyle1={
-    borderStyle: 'solid',
-    borderColor: 'black',
-    borderWidth: 2,
-    marginTop: 50,
-    marginLeft: '20%',
-    fontSize: 15,
-    padding: 20,
-    display: 'block',
-    width: '60%'
-}
-var styles2={
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    fontSize: 25,
-    position: 'fixed',
-    borderRadius:10 ,
-    top: 240,
-    right: 200,
-    backgroundColor: '#5f8f8f'
-}
+import { Button } from 'react-bootstrap';
+import { TaskContext } from '../context/TaskContext';
+import { ADD_NOTE, NEW_TASK , FILTER_ALL} from '../redux/actionTypes';
 
 
 
-const DateSelect = () => {
-    // const [startDate, setStartDate] = useState(new Date());
-    // return (
-    //   <DatePicker id='datePicker' selected={startDate} onChange={date => setStartDate(date)} />
-    // );
-    const [startDate, setStartDate] = useState(new Date());
-  const ExampleCustomInput = ({onClick }) => (
-    <button className="example-custom-input" style={dateStyle}  onClick={onClick}>
-      <span><i class="fa fa-calendar"></i></span>
-    </button>
-  );
-  return (
-    <DatePicker
-     className='ml-5'
-      selected={startDate}
-      onChange={date => setStartDate(date)}
-      customInput={<ExampleCustomInput />}
-    />
-  );
-  };
+
 const Task =(props)=>{
+  const [disable, setDisable] = useState(true);
+  const {task, dispatch} = useContext(TaskContext);
+  const handleTextChange=(e)=>{
+    dispatch({type: NEW_TASK, value: e.target.value })
+  }
+  const handleAddTask=()=>{
+    dispatch({type: ADD_NOTE, value: task.value});
+    dispatch({type:FILTER_ALL});
+  }
+   useEffect(()=> task.value? setDisable(false): setDisable(true))
     return(
-    <div>
-        <DateSelect   />  
-        <input type='text' id='taskEntry' className="form-control" style={inputStyle1} aria-label="..." placeholder='Enter a task here' onChange={(event)=>props.onTextChange(event)} value={props.task} />
-        <ButtonToolbar >
-            <ButtonGroup>
-                <Button  style={styles2} onClick={()=>props.onAdd()} id='addTask' disabled={!props.task}>
-                    <i className= 'fa fa-plus'></i>
-                </Button>
-            </ButtonGroup>
-        </ButtonToolbar>
+    <div className='taskDiv '>
+      <input type='text' className='form-control task-entry' id='taskEntry' autoFocus  aria-label="..." placeholder='Enter a task here' onChange={(e)=>handleTextChange(e)} value={task.task} />
+        <div className='input-group-append'>
+          <Button onClick={handleAddTask}  id='addTask' disabled={disable}>
+              <i className= 'fa fa-plus'></i>
+          </Button>
+        </div>    
+          
         
     </div>  
     );

@@ -22,7 +22,8 @@ export const taskReducer=(state, action)=>{
                 ...state.counters,
                 {
                 id: nextId(),
-                value: action.value,
+                value: action.payload.value,
+                date: action.payload.date,
                 checked: false
                 }
             ]
@@ -63,7 +64,7 @@ export const taskReducer=(state, action)=>{
             const filterTask= state.counters.filter(c=>c.checked === false)
             return {...state, filterTask};
         }
-        default:
+       default:
             return {...state};
 
         

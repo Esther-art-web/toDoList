@@ -22,7 +22,8 @@ const TaskList = ({count, index, setModalOpen,filterDone, filterUndone, setSelec
     return ( 
         <div key={count.id} id={index} >
             <div className="col-lg-10 col-md-8 mr-5 task">
-                <Button  onClick={handleCheckBoxClick} ><i className='fa fa-check'></i></Button>
+                <span className="date">Date:{count.date}</span>
+                <Button className='check-btn' onClick={handleCheckBoxClick} ><i className='fa fa-check'></i></Button>
                 <span id={index}  className="task-value"  style={{textDecoration: count.checked? 'line-through': 'none', color: count.checked? 'rgba(0,0,0,0.)': 'black'}}>{count.value} </span>
 
                     <span className='checked' >{count.checked? 'Done' : 'Undone'}</span>

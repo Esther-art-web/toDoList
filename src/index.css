@@ -138,10 +138,15 @@ input.task-entry:focus,input.task-entry:hover {
 .filters{
   text-align: center;
 }
-.filters span{
+.filters a{
  margin: 10%;
 }
-.filters span:hover,.filters span:active{
+.filters a:link, .filters a:visited{
+  color: black
+}
+.filters a:hover, .filters a:focus{
+  color: black;
+  text-decoration: none;
   cursor: pointer;
   border: 2px solid blue;
   border-top: 0;

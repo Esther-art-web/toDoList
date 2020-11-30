@@ -17,9 +17,9 @@ const TaskFilters = () => {
     // useEffect(()=> filterAll())
     return ( 
         <div className='filters'>
-            <span onClick={filterAll} ref={All} >All</span>
-            <span onClick={filterDone}>Done</span>
-            <span onClick={filterUndone}>Undone</span>
+            <a href="#"><span onClick={filterAll} ref={All} >All</span></a>
+            <a href="#"><span onClick={filterDone}>Done</span></a>
+            <a href="#"><span onClick={filterUndone}>Undone</span></a>
         </div>
      );
 }

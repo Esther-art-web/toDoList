@@ -21,10 +21,10 @@ const TaskList = ({count, index, setModalOpen,filterDone, filterUndone, setSelec
     }
     return ( 
         <div key={count.id} id={index} >
-            <div className="col-lg-10 col-md-8 mr-5 task">
+            <div className="col-lg-10 col-md-8 mr-5 task" >
                 <span className="date">Date:{count.date}</span>
                 <Button className='check-btn' onClick={handleCheckBoxClick} ><i className='fa fa-check'></i></Button>
-                <span id={index}  className="task-value"  style={{textDecoration: count.checked? 'line-through': 'none', color: count.checked? 'rgba(0,0,0,0.)': 'black'}}>{count.value} </span>
+                <span id={index}  className="task-value"  style={{textDecoration: count.checked? 'line-through': 'none', color: count.checked? 'rgba(0,0,0,0.5)': 'black'}}>{count.value} </span>
 
                     <span className='checked' >{count.checked? 'Done' : 'Undone'}</span>
                     <Button className='edit' id={count.id} onClick={(e)=>handleTextEdit(e, count.id)}>
@@ -32,7 +32,7 @@ const TaskList = ({count, index, setModalOpen,filterDone, filterUndone, setSelec
                     </Button>
                     <Button  className='delete' onClick={()=>{ dispatch({type: DELETE_NOTE, index: count.id}); dispatch({type:FILTER_ALL })}}>
                         <i className= 'fa fa-trash' ></i>
-                    </Button> 
+                    </Button>
             </div>
         </div>
      );

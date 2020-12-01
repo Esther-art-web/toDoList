@@ -37,7 +37,7 @@ const ModalBox = ({index, modalOpen, setModalOpen, selectedCounter}) => {
                 <span class="close"  onClick={closeModal}>&times;</span>
                 <h2>Edit Task</h2>
                 <input type='text' ref={textInput} className="form-control" aria-label="..." placeholder='Enter new task here'  onChange={(e)=>onTextChange(e)} defaultValue={selectedCounter.value}  autoFocus />
-                <Button className='btn btn-primary' id='edit' onClick={()=>onTextEdit(selectedCounter.id, editTask)} disabled={isDisabled}> Edit</Button>
+                <Button className='btn btn-primary' id='edit' onClick={()=>onTextEdit(selectedCounter.id, editTask)} disabled={isDisabled}> Save</Button>
             </div>
 
         </div>) :

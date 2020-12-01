@@ -21,14 +21,16 @@ const Task =({startDate})=>{
    useEffect(()=> task.task? setDisable(false): setDisable(true))
     return(
     <div className='taskDiv '>
-      <input type='text' className='form-control task-entry' id='taskEntry' autoFocus  aria-label="..." placeholder='Enter a task here' onChange={(e)=>handleTextChange(e)} value={task.task} />
+        <form onSubmit={handleAddTask}>
+            <input type='text' className='form-control task-entry' id='taskEntry' autoFocus  aria-label="..." placeholder='Enter a task here' onChange={(e)=>handleTextChange(e)} value={task.task} />
+        </form>
         <div className='input-group-append'>
           <Button onClick={handleAddTask}  id='addTask' disabled={disable}>
               <i className= 'fa fa-plus'></i>
           </Button>
-        </div>    
-          
-        
+        </div>
+
+
     </div>  
     );
 }

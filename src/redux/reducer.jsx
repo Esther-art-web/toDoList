@@ -1,9 +1,9 @@
 import * as actions from './actionTypes';
 
-var nextNum;
+var nextNum=0
 const nextId=()=> {
-    nextNum = nextNum || 0
-    return nextNum++;
+    // nextNum = nextNum || 0
+    return nextNum ++;
 };
 export const taskReducer=(state, action)=>{
     switch(action.type){

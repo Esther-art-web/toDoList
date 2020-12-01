@@ -30,13 +30,12 @@ const TaskEntry = (props) => {
     useEffect(()=>console.log(task));
     return ( 
         <div className='main-content' >
-            <div >
-                <h1 className='title'> To Do List </h1>
+            <div style={{marginTop: '10%'}} >
                 <DatePicker
-                    selected={startDate}
-                    onChange={date => setStartDate(date)}
-                    customInput={<ExampleCustomInput />}
-                    />
+                selected={startDate}
+                  onChange={date => setStartDate(date)}
+                  customInput={<ExampleCustomInput />}
+                   /> 
                 <Task task={task} startDate={startDate}  />
                 {task.value?
                 <TaskFilters dispatch= {dispatch} filterAll={filterAll} filterDone={filterDone} filterUndone={filterUndone}/>

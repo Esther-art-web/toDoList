@@ -10,7 +10,7 @@ body {
   z-index: -1;
   box-sizing: border-box;
   color: black;
-  background-color:teal;
+  background-color: #ffffff;
   position: relative;
   
 }
@@ -72,13 +72,13 @@ body {
 /* Beginning of NavBar */
 .navbar{
   text-align: center;
-  background-color: teal;
+  background-color: #6cb8b8;
   color: black;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  border: 2px ridge #17a2b8;
+  /*border: 2px ridge #17a2b8;*/
   z-index: 10001;
 }
 .badge{
@@ -119,21 +119,21 @@ h1.title{
   position: relative;
   width: 100%;
   padding: 5%;
+
 }
 #addTask{
-  z-index: 0;
-  padding: 2 ;
+  /*z-index: 0;*/
   font-size: 1rem;
   position: absolute;
-  border-radius: 50% ;
-  top: 20px;
-  right: 0px;
+  /*border-radius: 50% ;*/
+  /*top: 18px;*/
+  /*right: 0px;*/
   color:black;
-  background-color: teal;
+  background-color: #6cb8b8;
+  outline: none;
 }
 input.task-entry{
   color:black;
-  background: rgba(23, 162, 184, 0.5);
   border-radius: 5px;
   border: 1px solid #17a2b8;
   font-size: 1rem;
@@ -143,7 +143,7 @@ input.task-entry{
   width: 70%;
 }
 input.task-entry:focus,input.task-entry:hover {
-  background: rgba(23, 162, 184);
+  /*background: rgba(23, 162, 184);*/
   color: #000;
 }
 
@@ -300,9 +300,15 @@ button.delete{
     margin: 0 auto;
   }
   .task{
-    padding: 10px;
-    width: 50%;
-    margin: 1% 25%;
+    /*padding: 10px;*/
+    /*width: 50%;*/
+    /*margin: 1% 25%;*/
+    border-width: 1px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 10px 45px 0 rgba(0,0,0,.1);
+    margin-bottom: 20px;
+    padding: 40px 30px;
   }
   .example-custom-input{
     background-color: #007bff;;

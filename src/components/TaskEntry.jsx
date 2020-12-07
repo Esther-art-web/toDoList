@@ -8,7 +8,7 @@ import TaskList from './TaskList';
 import TaskFilters from '../components/TaskFilters';
 import DatePicker from "react-datepicker";
 
-const TaskEntry = (props) => {
+const TaskEntry = () => {
     const {task, dispatch} = useContext(TaskContext);
     const [modalOpen, setModalOpen] = useState(false)
     const [selectedCounter, setSelectedCounter] = useState(null);
@@ -25,28 +25,27 @@ const TaskEntry = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const ExampleCustomInput = ({ value, onClick }) => (
         <Button className="example-custom-input" onClick={onClick}>
-        <i className= "fa fa-clock">&#xf073;</i>
+        <i className= "fa fa-calender">&#xf073;</i>
         </Button>);
-    useEffect(()=>console.log(task));
     return ( 
         <div className='main-content' >
-            <div style={{marginTop: '10%'}} >
-                <DatePicker
+            <div style={{marginTop: '5%'}} >
+                {/* <DatePicker
                 selected={startDate}
                   onChange={date => setStartDate(date)}
                   customInput={<ExampleCustomInput />}
-                   /> 
+                   />  */}
                 <Task task={task} startDate={startDate}  />
-                {task.value?
+                <ModalBox modalOpen={modalOpen} setModalOpen={setModalOpen} selectedCounter={selectedCounter}/>
+                {task.filterTask.length?
                 <TaskFilters dispatch= {dispatch} filterAll={filterAll} filterDone={filterDone} filterUndone={filterUndone}/>
                 :
                 null}
-                {task.filterTask !== [] ?
+                {task.filterTask.length ?
                 task.filterTask.map((count,index)=>{
-                    return( <React.Fragment>
-                            <ModalBox index={index} modalOpen={modalOpen} setModalOpen={setModalOpen} selectedCounter={selectedCounter}/>
-                            <TaskList count={count} index={index} filterAll={filterAll} filterDone={filterDone} filterUndone={filterUndone} setModalOpen={setModalOpen} setSelectedCounter={setSelectedCounter}/>
-                        </React.Fragment>);
+                    return( 
+                            <TaskList key={count.id} count={count} index={index} filterAll={filterAll} filterDone={filterDone} filterUndone={filterUndone} setModalOpen={setModalOpen} setSelectedCounter={setSelectedCounter}/>
+                        );
                         
                     }
                 ): <span className="no-entry">You have no task yet, free time:)</span>}

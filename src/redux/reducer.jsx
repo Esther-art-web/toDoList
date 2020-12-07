@@ -3,6 +3,7 @@ import * as actions from './actionTypes';
 var nextNum=0
 const nextId=()=> {
     // nextNum = nextNum || 0
+    console.log(nextNum);
     return nextNum ++;
 };
 export const taskReducer=(state, action)=>{

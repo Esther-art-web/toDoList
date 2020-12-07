@@ -1,19 +1,16 @@
-import React, { useContext,useState, useEffect, useRef } from 'react';
+import React, { useContext,useState } from 'react';
 import { Button} from 'reactstrap';
 import {TaskContext} from '../context/TaskContext';
 import { EDIT_NOTE, FILTER_ALL } from '../redux/actionTypes';
 
-const ModalBox = ({index, modalOpen, setModalOpen, selectedCounter}) => {
-    const [isDisabled, setIsDisabled] = useState(true)
-    const textInput = useRef(null);
-    const closeBackDrop = useRef(null);
-    const closePageModal = useRef(null);
+const ModalBox = ({ modalOpen, setModalOpen, selectedCounter}) => {
+    const [isDisabled, setIsDisabled] = useState(true);
     const [editTask, setEditTask] = useState('');
-    const {task, dispatch} = useContext(TaskContext);
+    const { dispatch} = useContext(TaskContext);
     const closeModal=()=>{
         setModalOpen(false);
     }
-    useEffect(()=>{setEditTask(selectedCounter ? selectedCounter.value : null);},[])
+    // useEffect(()=>{setEditTask(selectedCounter ? selectedCounter.value : null);},[])
     const onTextChange=(e)=>{
         if (e.target.value){
             setIsDisabled(false);
@@ -32,11 +29,11 @@ const ModalBox = ({index, modalOpen, setModalOpen, selectedCounter}) => {
     
     return ( selectedCounter && modalOpen? 
        (
-        <div class="modal-box"  ref={closeBackDrop} style={{display:'block'}}>
-            <div class="modal-content" ref={closePageModal}>
-                <span class="close"  onClick={closeModal}>&times;</span>
+        <div className="modal-box"  style={{display:'block'}}>
+            <div className="modal-content" >
+                <span className="close"  onClick={closeModal}>&times;</span>
                 <h2>Edit Task</h2>
-                <input type='text' ref={textInput} className="form-control" aria-label="..." placeholder='Enter new task here'  onChange={(e)=>onTextChange(e)} defaultValue={selectedCounter.value}  autoFocus />
+                <input type='text'  className="form-control" aria-label="..." placeholder='Enter new task here'  onChange={(e)=>onTextChange(e)} defaultValue={selectedCounter.value}  autoFocus />
                 <Button className='btn btn-primary' id='edit' onClick={()=>onTextEdit(selectedCounter.id, editTask)} disabled={isDisabled}> Save</Button>
             </div>
 

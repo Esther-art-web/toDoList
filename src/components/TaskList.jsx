@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import { DELETE_NOTE ,CHECK_BOX_CLICK, FILTER_ALL} from '../redux/actionTypes';
 
 
-const TaskList = ({count, index, setModalOpen,filterDone, filterUndone, setSelectedCounter}) => {
+const TaskList = ({count, index, setModalOpen,setSelectedCounter}) => {
     const { dispatch } = useContext(TaskContext);
 
     const handleTextEdit=(e, index)=>{

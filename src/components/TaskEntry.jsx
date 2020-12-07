@@ -1,12 +1,12 @@
-import React, { useContext,useState,useEffect} from 'react';
+import React, { useContext,useState} from 'react';
 import {FILTER_ALL, FILTER_DONE, FILTER_UNDONE} from '../redux/actionTypes';
 import { TaskContext } from '../context/TaskContext';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 import ModalBox from './Modal';
 import Task from './Task';
 import TaskList from './TaskList';
 import TaskFilters from '../components/TaskFilters';
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
 const TaskEntry = () => {
     const {task, dispatch} = useContext(TaskContext);
@@ -22,11 +22,11 @@ const TaskEntry = () => {
     const filterUndone=()=>{
         dispatch({type:FILTER_UNDONE})
     }
-    const [startDate, setStartDate] = useState(new Date());
-    const ExampleCustomInput = ({ value, onClick }) => (
-        <Button className="example-custom-input" onClick={onClick}>
-        <i className= "fa fa-calender">&#xf073;</i>
-        </Button>);
+    const [startDate] = useState(new Date());
+    // const ExampleCustomInput = ({ value, onClick }) => (
+    //     <Button className="example-custom-input" onClick={onClick}>
+    //     <i className= "fa fa-calender">&#xf073;</i>
+    //     </Button>);
     return ( 
         <div className='main-content' >
             <div style={{marginTop: '5%'}} >
